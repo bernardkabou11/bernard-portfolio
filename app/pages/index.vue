@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import * as THREE from 'three'
+import projectMichelin from '~/assets/images/projects/refonte-guide-michelin.svg'
+import projectParfum from '~/assets/images/projects/ecommerce-parfumerie.svg'
+import projectCoaching from '~/assets/images/projects/plateforme-coaching.svg'
 
 const skills = {
   frontend: ['Vue.js', 'Nuxt', 'React', 'Angular', 'TailwindCSS', 'Three.js'],
   backend: ['Node.js', 'Express.js', 'NestJS', 'API REST', 'Swagger / OpenAPI'],
   data: ['MySQL', 'MongoDB', 'PostgreSQL', 'SQL'],
-  devops: ['Docker', 'Kubernetes', 'Terraform', 'Portainer', 'GitHub Actions', 'Linux'],
+  devops: ['Docker', 'Kubernetes', 'Terraform', 'Portainer', 'GitHub Actions', 'Linux', 'n8n'],
   languages: ['JavaScript / TypeScript', 'Java', 'Python', 'PHP', 'C++'],
 }
 
@@ -17,18 +19,21 @@ const projectList = [
     stack: ['Nuxt', 'TailwindCSS', 'UX/UI'],
     featured: true,
     link: '/projects',
+    image: projectMichelin,
   },
   {
     title: 'E-commerce parfumerie',
     description: 'Application complète de boutique en ligne avec gestion des produits, du panier, des commandes et de l’authentification utilisateur.',
     stack: ['Vue.js', 'Node.js', 'API REST'],
     link: '/projects',
+    image: projectParfum,
   },
   {
     title: 'Plateforme coaching sportif',
     description: 'Dashboard de suivi de programmes et de performances, pensé pour le suivi personnalisé et la motivation des utilisateurs.',
     stack: ['Nuxt', 'PostgreSQL', 'Dashboard'],
     link: '/projects',
+    image: projectCoaching,
   },
 ]
 
@@ -43,63 +48,116 @@ const heroCanvas = ref<HTMLDivElement | null>(null)
 onMounted(() => {
   if (!heroCanvas.value) return
 
+  const canvasContainer = heroCanvas.value
   const scene = new THREE.Scene()
-  const camera = new THREE.PerspectiveCamera(55, heroCanvas.value.clientWidth / heroCanvas.value.clientHeight, 0.1, 1000)
+  scene.fog = new THREE.FogExp2('#020817', 0.12)
+
+  const camera = new THREE.PerspectiveCamera(55, canvasContainer.clientWidth / canvasContainer.clientHeight, 0.1, 1000)
   camera.position.z = 8
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-  renderer.setSize(heroCanvas.value.clientWidth, heroCanvas.value.clientHeight)
+  renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight)
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-  heroCanvas.value.appendChild(renderer.domElement)
+  canvasContainer.appendChild(renderer.domElement)
 
-  const particlesGeometry = new THREE.BufferGeometry()
-  const count = 1200
+  const geometry = new THREE.BufferGeometry()
+  const count = 2200
   const positions = new Float32Array(count * 3)
+  const colors = new Float32Array(count * 3)
 
-  for (let i = 0; i < count * 3; i += 3) {
-    positions[i] = (Math.random() - 0.5) * 12
-    positions[i + 1] = (Math.random() - 0.5) * 12
-    positions[i + 2] = (Math.random() - 0.5) * 12
+  for (let i = 0; i < count; i += 1) {
+    const radius = 2 + Math.random() * 5.8
+    const angle = Math.random() * Math.PI * 2
+    const y = (Math.random() - 0.5) * 10
+
+    positions[i * 3] = Math.cos(angle) * radius
+    positions[i * 3 + 1] = y
+    positions[i * 3 + 2] = Math.sin(angle) * radius
+
+    const color = new THREE.Color().setHSL(0.55 + Math.random() * 0.15, 0.8, 0.65)
+    colors[i * 3] = color.r
+    colors[i * 3 + 1] = color.g
+    colors[i * 3 + 2] = color.b
   }
 
-  particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
 
   const particlesMaterial = new THREE.PointsMaterial({
-    color: '#7dd3fc',
-    size: 0.04,
+    size: 0.06,
     transparent: true,
-    opacity: 0.9,
+    opacity: 0.95,
+    vertexColors: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
   })
 
-  const particles = new THREE.Points(particlesGeometry, particlesMaterial)
+  const particles = new THREE.Points(geometry, particlesMaterial)
   scene.add(particles)
 
-  const ambientLight = new THREE.AmbientLight('#93c5fd', 1.2)
-  scene.add(ambientLight)
+  const ringGeometry = new THREE.TorusKnotGeometry(1.7, 0.38, 220, 32)
+  const ringMaterial = new THREE.MeshStandardMaterial({
+    color: '#67e8f9',
+    emissive: '#38bdf8',
+    emissiveIntensity: 0.8,
+    metalness: 0.9,
+    roughness: 0.2,
+    transparent: true,
+    opacity: 0.75,
+  })
+  const ring = new THREE.Mesh(ringGeometry, ringMaterial)
+  ring.rotation.x = Math.PI / 2.8
+  scene.add(ring)
+
+  const ambientLight = new THREE.AmbientLight('#dbeafe', 1.5)
+  const pointLight = new THREE.PointLight('#7dd3fc', 1.8, 30, 2)
+  pointLight.position.set(3, 4, 6)
+  scene.add(ambientLight, pointLight)
+
+  const pointer = new THREE.Vector2(0, 0)
+
+  const handlePointerMove = (event: PointerEvent) => {
+    const rect = canvasContainer.getBoundingClientRect()
+    pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+    pointer.y = -(((event.clientY - rect.top) / rect.height) * 2 - 1)
+  }
+
+  window.addEventListener('pointermove', handlePointerMove)
 
   const animate = () => {
     requestAnimationFrame(animate)
-    particles.rotation.x += 0.0007
-    particles.rotation.y += 0.0009
+
+    particles.rotation.x += 0.0008
+    particles.rotation.y += 0.0011
+    particles.position.x += (pointer.x * 1.8 - particles.position.x) * 0.03
+    particles.position.y += (pointer.y * 1.2 - particles.position.y) * 0.03
+
+    ring.rotation.x += 0.008
+    ring.rotation.y += 0.01
+    ring.position.z = -1
+
     renderer.render(scene, camera)
   }
 
   animate()
 
   const handleResize = () => {
-    if (!heroCanvas.value) return
-    camera.aspect = heroCanvas.value.clientWidth / heroCanvas.value.clientHeight
+    if (!canvasContainer) return
+    camera.aspect = canvasContainer.clientWidth / canvasContainer.clientHeight
     camera.updateProjectionMatrix()
-    renderer.setSize(heroCanvas.value.clientWidth, heroCanvas.value.clientHeight)
+    renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight)
   }
 
   window.addEventListener('resize', handleResize)
 
   onBeforeUnmount(() => {
     window.removeEventListener('resize', handleResize)
+    window.removeEventListener('pointermove', handlePointerMove)
     renderer.dispose()
-    particlesGeometry.dispose()
+    geometry.dispose()
     particlesMaterial.dispose()
+    ringGeometry.dispose()
+    ringMaterial.dispose()
   })
 })
 </script>
@@ -135,7 +193,7 @@ onMounted(() => {
 
           <div class="mt-10 flex flex-wrap gap-6 text-sm text-slate-300">
             <div>
-              <p class="text-2xl font-bold text-white">Master 1</p>
+              <p class="text-2xl font-bold text-white">Master 2</p>
               <p>Ingénierie du Web</p>
             </div>
             <div>

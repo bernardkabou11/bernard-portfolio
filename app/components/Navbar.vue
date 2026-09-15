@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import profileImage from '~/assets/images/profile.svg'
+
 const navItems = [
   { label: 'Accueil', to: '/' },
   { label: 'À propos', to: '/about' },
@@ -21,9 +23,7 @@ watch(
   <header class="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/75 backdrop-blur-xl">
     <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
       <NuxtLink to="/" class="flex items-center gap-3">
-        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-blue-700 text-sm font-bold text-white shadow-lg shadow-sky-500/30">
-          BK
-        </div>
+        <img :src="profileImage" alt="Bernard Daniel Kabou" class="h-10 w-10 rounded-xl object-cover ring-1 ring-sky-400/40" />
         <div>
           <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-300">Bernard</p>
           <p class="text-xs text-slate-400">Full-Stack Developer</p>
