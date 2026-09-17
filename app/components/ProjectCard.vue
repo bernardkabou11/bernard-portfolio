@@ -17,29 +17,37 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <article class="group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/80 shadow-[0_20px_60px_rgba(15,23,42,0.3)] transition duration-300 hover:-translate-y-1 hover:border-sky-500/40 hover:shadow-[0_25px_80px_rgba(14,165,233,0.18)]">
-    <div
-      class="relative h-52 overflow-hidden border-b border-slate-800 bg-cover bg-center bg-no-repeat"
-      :style="image ? { backgroundImage: `linear-gradient(135deg, rgba(2, 6, 23, 0.7), rgba(15, 23, 42, 0.28)), url('${image}')` } : {}"
-    >
-      <div class="flex h-full items-end justify-between p-6">
-        <div>
-          <p v-if="featured" class="mb-2 inline-flex rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-300">
+    <div class="relative h-56 overflow-hidden border-b border-slate-800">
+      <img
+        v-if="image"
+        :src="image"
+        :alt="title"
+        class="absolute inset-0 h-full w-full scale-105 object-cover transition duration-500 group-hover:scale-110"
+      />
+      <div class="absolute inset-0 bg-gradient-to-br from-slate-950/80 via-slate-900/35 to-slate-950/80" />
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(56,189,248,0.18),_transparent_32%)]" />
+
+      <div class="relative flex h-full items-end justify-between p-5 sm:p-6">
+        <div class="max-w-[60%]">
+          <p v-if="featured" class="inline-flex rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-300">
             Projet phare
           </p>
-          <div class="h-12 w-12 rounded-xl bg-sky-500/20 ring-1 ring-sky-400/40 backdrop-blur-sm" />
         </div>
-        <span class="rounded-full border border-slate-700 bg-slate-900/70 px-2.5 py-1 text-xs text-slate-200 backdrop-blur-sm">{{ title }}</span>
+
+        <span class="max-w-[55%] rounded-full border border-slate-700/80 bg-slate-900/70 px-2.5 py-1 text-center text-[10px] font-medium text-slate-100 shadow-lg shadow-slate-950/30 backdrop-blur-sm sm:text-xs">
+          {{ title }}
+        </span>
       </div>
     </div>
 
-    <div class="p-6">
-      <h3 class="text-xl font-semibold text-white">{{ title }}</h3>
+    <div class="p-5 sm:p-6">
+      <h3 class="text-lg font-semibold text-white sm:text-xl">{{ title }}</h3>
       <p class="mt-3 text-sm leading-6 text-slate-300">
         {{ description }}
       </p>
 
       <div class="mt-5 flex flex-wrap gap-2">
-        <span v-for="item in stack" :key="item" class="rounded-full border border-slate-700 bg-slate-800 px-2.5 py-1 text-[11px] font-medium text-slate-200">
+        <span v-for="item in stack" :key="item" class="rounded-full border border-slate-700 bg-slate-800/90 px-2.5 py-1 text-[11px] font-medium text-slate-200 shadow-sm shadow-slate-950/20">
           {{ item }}
         </span>
       </div>
