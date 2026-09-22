@@ -1,0 +1,1 @@
+J'aimerai que l'ia enlève la grille qui se trouve en fond des pages 

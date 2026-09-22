@@ -164,8 +164,6 @@ onMounted(() => {
 
 <template>
   <div class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-grid-slate opacity-40" />
-
     <section class="relative mx-auto max-w-6xl px-4 pb-20 pt-16 sm:px-6 lg:px-8 lg:pb-28 lg:pt-20">
       <div class="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
