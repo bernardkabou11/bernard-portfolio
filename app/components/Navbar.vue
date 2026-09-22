@@ -31,11 +31,11 @@ const selectTheme = (themeId: string) => {
 <template>
   <header class="sticky top-0 z-50 border-b border-[var(--border-primary)] bg-[var(--bg-header)]/75 backdrop-blur-xl">
     <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-      <NuxtLink to="/" class="flex items-center gap-3">
-        <img :src="profileImage" alt="Bernard Daniel Kabou" class="h-10 w-10 rounded-xl object-cover ring-1 ring-sky-400/40" />
-        <div>
-          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--text-muted)]">Bernard</p>
-          <p class="text-xs text-[var(--text-soft)]">Full-Stack Developer</p>
+      <NuxtLink to="/" class="flex min-w-0 items-center gap-3">
+        <img :src="profileImage" alt="Bernard Daniel Kabou" class="h-10 w-10 shrink-0 rounded-xl object-cover ring-1 ring-sky-400/40" />
+        <div class="min-w-0">
+          <p class="truncate text-sm font-semibold uppercase tracking-[0.2em] text-[var(--text-muted)]">Bernard</p>
+          <p class="hidden text-xs text-[var(--text-soft)] sm:block">Full-Stack Developer</p>
         </div>
       </NuxtLink>
 
@@ -55,13 +55,14 @@ const selectTheme = (themeId: string) => {
         <div class="relative">
           <button
             type="button"
-            class="inline-flex items-center gap-2 rounded-full border border-[var(--border-primary)] bg-[var(--bg-soft)] px-3 py-2 text-sm font-medium text-[var(--text-primary)] transition hover:border-[var(--accent-primary)] active:scale-95"
+            class="inline-flex items-center gap-2 rounded-full border border-[var(--border-primary)] bg-[var(--bg-soft)] px-2.5 py-2 text-sm font-medium text-[var(--text-primary)] transition hover:border-[var(--accent-primary)] active:scale-95 sm:px-3"
             aria-haspopup="listbox"
             :aria-expanded="isThemeMenuOpen"
             @click="isThemeMenuOpen = !isThemeMenuOpen"
           >
             <span class="h-2.5 w-2.5 rounded-full bg-[var(--accent-primary)]" aria-hidden="true" />
-            <span>Thème : {{ themeOptions.find((theme) => theme.id === currentTheme)?.label }}</span>
+            <span class="hidden sm:inline">Thème : {{ themeOptions.find((theme) => theme.id === currentTheme)?.label }}</span>
+            <span class="sm:hidden">Thème</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform" :class="{ 'rotate-180': isThemeMenuOpen }" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m6 9 6 6 6-6" />
             </svg>

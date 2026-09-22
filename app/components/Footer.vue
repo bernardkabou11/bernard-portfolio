@@ -4,7 +4,7 @@ import profileImage from '~/assets/images/profile.svg'
 
 <template>
   <footer class="border-t border-slate-800 bg-slate-950/80">
-    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.3fr_0.7fr_0.7fr] lg:px-8">
+    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.7fr_0.7fr] lg:px-8">
       <div>
         <div class="flex items-center gap-3">
           <img :src="profileImage" alt="Bernard Daniel Kabou" class="h-10 w-10 rounded-xl object-cover ring-1 ring-sky-400/40" />

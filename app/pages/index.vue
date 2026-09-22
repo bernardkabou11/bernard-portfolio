@@ -169,29 +169,29 @@ onMounted(() => {
     <section class="relative mx-auto max-w-6xl px-4 pb-20 pt-16 sm:px-6 lg:px-8 lg:pb-28 lg:pt-20">
       <div class="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
-          <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-sky-500/30 bg-sky-500/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-sky-300">
+          <div class="mb-6 inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-2 text-[10px] font-medium uppercase tracking-[0.14em] text-sky-300 sm:px-4 sm:text-xs sm:tracking-[0.2em]">
             <span class="h-2 w-2 rounded-full bg-sky-400" />
-            Disponible pour alternance
+            <span>Disponible pour alternance</span>
           </div>
 
-          <h1 class="max-w-xl text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 class="max-w-xl text-[2.1rem] font-black leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
             Développeur web <span class="text-sky-400">Full-Stack</span> & DevOps
           </h1>
 
-          <p class="mt-6 max-w-xl text-lg leading-8 text-slate-300">
+          <p class="mt-6 max-w-xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
             Je conçois des applications web modernes, bien structurées et orientées performance, en combinant design, développement et infrastructure.
           </p>
 
-          <div class="mt-8 flex flex-wrap gap-4">
-            <NuxtLink to="/projects" class="rounded-full bg-sky-500 px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-sky-500/30 transition hover:bg-sky-400">
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <NuxtLink to="/projects" class="w-full rounded-full bg-sky-500 px-6 py-3 text-center text-sm font-semibold text-slate-950 shadow-lg shadow-sky-500/30 transition hover:bg-sky-400 sm:w-auto">
               Voir mes projets
             </NuxtLink>
-            <NuxtLink to="/contact" class="rounded-full border border-slate-700 bg-slate-900/60 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:text-white">
+            <NuxtLink to="/contact" class="w-full rounded-full border border-slate-700 bg-slate-900/60 px-6 py-3 text-center text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:text-white sm:w-auto">
               Me contacter
             </NuxtLink>
           </div>
 
-          <div class="mt-10 flex flex-wrap gap-6 text-sm text-slate-300">
+          <div class="mt-10 grid gap-4 text-sm text-slate-300 sm:grid-cols-3 sm:gap-6">
             <div>
               <p class="text-2xl font-bold text-white">Master 2</p>
               <p>Ingénierie du Web</p>
@@ -238,9 +238,9 @@ onMounted(() => {
         title="Des compétences couvrant le web et l’infrastructure"
       />
 
-      <div class="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-5">
+      <div class="mt-12 grid gap-8 sm:grid-cols-2 xl:grid-cols-5">
         <div v-for="(group, key) in skills" :key="key" class="rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
-          <h3 class="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-sky-300">
+          <h3 class="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-sky-300 sm:text-sm sm:tracking-[0.2em]">
             {{ key === 'frontend' ? 'Front-end' : key === 'backend' ? 'Back-end' : key === 'data' ? 'Base de données' : key === 'devops' ? 'DevOps' : 'Langages' }}
           </h3>
           <div class="flex flex-wrap gap-2">

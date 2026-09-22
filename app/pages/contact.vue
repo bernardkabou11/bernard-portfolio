@@ -67,7 +67,7 @@ const submitForm = async () => {
     />
 
     <div class="mt-12 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-      <div class="rounded-[2rem] border border-slate-800 bg-slate-900/70 p-7">
+      <div class="rounded-[2rem] border border-slate-800 bg-slate-900/70 p-5 sm:p-7">
         <h3 class="text-xl font-semibold text-white">Informations</h3>
         <div class="mt-6 space-y-5">
           <a
@@ -76,7 +76,7 @@ const submitForm = async () => {
             :href="item.href"
             target="_blank"
             rel="noreferrer"
-            class="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/70 px-4 py-3 text-sm text-slate-300 transition hover:border-sky-500/40 hover:text-white"
+            class="flex flex-col gap-2 rounded-xl border border-slate-800 bg-slate-950/70 px-4 py-3 text-sm text-slate-300 transition hover:border-sky-500/40 hover:text-white sm:flex-row sm:items-center sm:justify-between"
           >
             <span class="font-medium text-slate-400">{{ item.label }}</span>
             <span>{{ item.value }}</span>
@@ -84,7 +84,7 @@ const submitForm = async () => {
         </div>
       </div>
 
-      <form class="rounded-[2rem] border border-slate-800 bg-slate-900/70 p-7" @submit.prevent="submitForm">
+      <form class="rounded-[2rem] border border-slate-800 bg-slate-900/70 p-5 sm:p-7" @submit.prevent="submitForm">
         <div class="grid gap-5 sm:grid-cols-2">
           <div>
             <label for="name" class="mb-2 block text-sm font-medium text-slate-300">Nom</label>
