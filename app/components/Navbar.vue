@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import profileImage from '~/assets/images/profile.svg'
+import profileImage from '~/assets/images/profile.png'
 
 const { themeOptions, currentTheme, setTheme } = useTheme()
 
@@ -32,7 +32,7 @@ const selectTheme = (themeId: string) => {
   <header class="sticky top-0 z-50 border-b border-[var(--border-primary)] bg-[var(--bg-header)]/75 backdrop-blur-xl">
     <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
       <NuxtLink to="/" class="flex min-w-0 items-center gap-3">
-        <img :src="profileImage" alt="Bernard Daniel Kabou" class="h-10 w-10 shrink-0 rounded-xl object-cover ring-1 ring-sky-400/40" />
+        <img :src="profileImage" alt="Bernard Daniel Kabou" class="h-10 w-10 shrink-0 rounded-xl object-cover object-center ring-1 ring-sky-400/40" />
         <div class="min-w-0">
           <p class="truncate text-sm font-semibold uppercase tracking-[0.2em] text-[var(--text-muted)]">Bernard</p>
           <p class="hidden text-xs text-[var(--text-soft)] sm:block">Full-Stack Developer</p>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import profileImage from '~/assets/images/profile.svg'
+import profileImage from '~/assets/images/profile.png'
 
 const qualities = ['Travail en équipe', 'Rigueur', 'Organisation', 'Productivité', 'Gestion du stress', 'Précision']
 </script>
@@ -15,7 +15,7 @@ const qualities = ['Travail en équipe', 'Rigueur', 'Organisation', 'Productivit
     <div class="mt-12 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
       <div class="rounded-[2rem] border border-slate-800 bg-gradient-to-br from-slate-900 via-slate-900 to-sky-950/50 p-5 shadow-2xl shadow-sky-500/10 sm:p-8">
         <div class="mb-6 overflow-hidden rounded-2xl border border-sky-400/30 bg-slate-950/70 shadow-lg shadow-sky-500/10">
-          <img :src="profileImage" alt="Bernard Daniel Kabou" class="h-52 w-full object-cover object-center" />
+          <img :src="profileImage" alt="Bernard Daniel Kabou" class="h-64 w-full object-cover object-top sm:h-80" />
         </div>
         <p class="text-sm uppercase tracking-[0.24em] text-sky-300">Profil</p>
         <div class="mt-6 space-y-5 text-base leading-7 text-slate-300">
